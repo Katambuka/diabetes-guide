@@ -1,7 +1,11 @@
-/* eslint-disable react/no-unescaped-entities */
 
+
+/* eslint-disable react/no-unescaped-entities */
 import Image from "next/image";
 import ArticleCard from "./components/ArticleCard";
+import { Link } from "lucide-react";
+import { categories } from "@/data/categories";
+import CategoryLink from "./components/CategoryLink";
 
 // Sample data for articles
 const articles = [
@@ -43,22 +47,12 @@ const articles = [
   },
 ];
 
-// Featured categories
-const categories = [
-  { name: "Diabetes Basics", icon: "📚", count: 12 },
-  { name: "Nutrition", icon: "🍎", count: 18 },
-  { name: "Medication", icon: "💊", count: 8 },
-  { name: "Lifestyle", icon: "🚶‍♂️", count: 15 },
-  { name: "Complications", icon: "⚠️", count: 6 },
-  { name: "Mental Health", icon: "🧠", count: 9 },
-];
-
 export default function Home() {
   return (
     <>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-500 to-teal-400 text-white py-20">
+      <section className="relative bg-gradient-to-r from-blue-600 to-teal-500 text-white py-20">
         <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 mb-10 md:mb-0">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
@@ -78,7 +72,7 @@ export default function Home() {
           </div>
           <div className="md:w-1/2 flex justify-center">
             <Image 
-              src="/images/diabetes-hero.png" 
+              src="/images/image1.jpg" 
               alt="Happy person managing diabetes" 
               width={500} 
               height={500}
@@ -129,7 +123,7 @@ export default function Home() {
           <section className="mb-16">
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-2xl font-bold text-gray-800">Featured Articles</h2>
-              <a href="#" className="text-blue-600 hover:underline font-medium">View All Articles</a>
+              <Link href="#" className="text-blue-600 hover:underline font-medium">View All Articles</Link>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {articles.map((article) => (
@@ -140,21 +134,13 @@ export default function Home() {
 
           {/* Categories Section */}
           <section className="mb-16">
-            <h2 className="text-2xl font-bold text-gray-800 mb-8">Explore by Category</h2>
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {categories.map((category) => (
-                <a 
-                  key={category.name} 
-                  href="#" 
-                  className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition duration-300 border border-gray-100 hover:border-blue-200 text-center"
-                >
-                  <span className="text-2xl block mb-2">{category.icon}</span>
-                  <h3 className="font-semibold mb-1">{category.name}</h3>
-                  <p className="text-sm text-gray-500">{category.count} articles</p>
-                </a>
-              ))}
-            </div>
-          </section>
+        <h2 className="text-2xl font-bold text-gray-800 mb-8">Explore by Category</h2>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {categories.map((category) => (
+            <CategoryLink key={category.slug} category={category} />
+          ))}
+        </div>
+        </section>
 
           {/* Testimonial Section */}
           <section className="bg-blue-600 text-white rounded-xl p-8 mb-16">
@@ -168,7 +154,7 @@ export default function Home() {
                   </blockquote>
                   <div className="flex items-center">
                     <Image 
-                      src="/images/user-testimonial.jpg" 
+                      src="/images/image1.jpg" 
                       alt="Sarah J." 
                       width={60} 
                       height={60}
@@ -211,3 +197,4 @@ export default function Home() {
     </>
   );
 }
+  
