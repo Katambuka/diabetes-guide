@@ -34,5 +34,10 @@ export const categories = [
      icon: "🧠",
      count: 9,
      slug: "mental-health"
-   }
+   },
+   {
+    slug: "diabetes",
+    name: "Diabetes",
+    description: "Articles about diabetes management and research"
+  },
  ];

@@ -1,8 +1,7 @@
-// app/api/send-email/route.ts
-import { NextResponse } from 'next/server';
+
 import nodemailer from 'nodemailer';
 
-export async function POST(request: Request) {
+export async function POST(request: Request): Promise<Response> {
   const { to, name, email, subject, message } = await request.json();
 
   // Create a transporter using your email service
@@ -29,9 +28,15 @@ export async function POST(request: Request) {
       `,
     });
 
-    return NextResponse.json({ success: true });
+    return new Response(JSON.stringify({ success: true }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
   } catch (error) {
     console.error('Error sending email:', error);
-    return NextResponse.json({ success: false }, { status: 500 });
+    return new Response(JSON.stringify({ success: false }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }
