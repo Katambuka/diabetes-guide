@@ -3,9 +3,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import Image from "next/image";
 import ArticleCard from "./components/ArticleCard";
-import { Link } from "lucide-react";
 import { categories } from "@/data/categories";
 import CategoryLink from "./components/CategoryLink";
+import Link from "next/link";
 
 // Sample data for articles
 const articles = [
