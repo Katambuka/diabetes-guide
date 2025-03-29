@@ -1,4 +1,5 @@
-interface BlogPost {
+ // src/types/blog.d.ts
+export interface BlogPost {
    slug: string;
    title: string;
    excerpt: string;

@@ -1,4 +1,5 @@
-export const blogPosts = [
+/*export const blogPosts = [
+
    {
      slug: "type-2-diabetes",
      title: "Understanding Type 2 Diabetes: Causes, Symptoms, and Management",
@@ -78,4 +79,40 @@ UK Prospective Diabetes Study (UKPDS) Group. Lancet. 1998. ↩]</p> so where do 
      author: "Dr. Medical Expert"
    },
    // ...other posts
- ];
+ ];*/
+
+ // src/data/blogPosts.ts
+import { BlogPost } from "../../types/blog";
+
+export const blogPosts: BlogPost[] = [
+  {
+    slug: "type-2-diabetes",
+    title: "Understanding Type 2 Diabetes: Causes, Symptoms, and Management",
+    excerpt: "Comprehensive guide to Type 2 diabetes based on peer-reviewed research",
+    content: `
+      <section class="pathophysiology">
+        <h2>Causes and Risk Factors</h2>
+        <h3>1. Insulin Resistance and Beta-Cell Dysfunction</h3>
+        <p>Type 2 diabetes is a chronic metabolic disorder characterized by elevated blood sugar levels...</p>
+        
+        <h3>2. Obesity and Sedentary Lifestyle</h3>
+        <p>Excess fat tissue releases inflammatory cytokines that disrupt insulin signaling pathways...</p>
+      </section>
+      
+      <section class="symptoms">
+        <h2>Symptoms of Type 2 Diabetes</h2>
+        <p>The clinical presentation can be insidious...</p>
+      </section>
+      
+      <!-- Rest of your HTML content -->
+    `,
+    image: "/images/diabetes-article.jpg",
+    category: "diabetes",
+    tags: ["health", "research", "medicine"],
+    date: "2025-03-27",
+    author: "Dr. Medical Expert",
+    authorBio: "Endocrinologist with 15 years of experience",
+    readTime: "8 min"
+  },
+  // Add more posts here
+];
