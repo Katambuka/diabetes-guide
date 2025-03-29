@@ -13,3 +13,4 @@ import 'next';
    authorBio?: string;
    readTime?: string;
  }
+ 

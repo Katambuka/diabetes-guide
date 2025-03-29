@@ -7,41 +7,41 @@ import { categories } from "@/data/categories";
 import CategoryLink from "./components/CategoryLink";
 import Link from "next/link";
 
-// Sample data for articles
+//  articles
 const articles = [
   {
     id: 1,
     title: "Understanding Diabetes: Types and Symptoms",
-    excerpt: "Learn about the different types of diabetes, their symptoms, and how they affect your body.",
-    slug: "understanding-diabetes",
-    image: "/images/diabetes-types.jpg",
+    excerpt: "Learn about the different types of diabetes...",
+    slug: "understanding-type-2-diabetes", 
+    image: "/images/image6.jpg",
     category: "Diabetes Basics",
     readTime: "5 min read"
   },
   {
     id: 2,
     title: "Healthy Eating for Diabetics: A Complete Guide",
-    excerpt: "Discover the best foods to eat, meal planning strategies, and recipes for managing blood sugar levels.",
-    slug: "healthy-eating-for-diabetics",
-    image: "/images/diabetic-food.jpg",
+    excerpt: "Discover the best foods to eat...",
+    slug: "foods-for-blood-sugar-control", 
+    image: "/images/image8.jpg", 
     category: "Nutrition",
     readTime: "8 min read"
   },
   {
     id: 3,
     title: "Exercise and Diabetes: Creating Your Fitness Plan",
-    excerpt: "Learn how physical activity affects blood sugar and how to create a safe exercise routine.",
-    slug: "exercise-and-diabetes",
-    image: "/images/diabetes-exercise.jpg",
+    excerpt: "Learn how physical activity affects...",
+    slug: "exercise-for-diabetics", 
+    image: "/images/image6.jpg",
     category: "Lifestyle",
     readTime: "6 min read"
   },
   {
     id: 4,
     title: "Monitoring Blood Sugar: Devices and Techniques",
-    excerpt: "Everything you need to know about glucose meters, continuous monitors, and tracking your levels.",
-    slug: "blood-sugar-monitoring",
-    image: "/images/glucose-monitor.jpg",
+    excerpt: "Everything you need to know about...",
+    slug: "diabetes-technology", 
+    image: "/images/image8.jpg",
     category: "Management",
     readTime: "7 min read"
   },
@@ -119,7 +119,7 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Featured Articles */}
+          {/* Featured Articles /}
           <section className="mb-16">
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-2xl font-bold text-gray-800">Featured Articles</h2>
@@ -130,7 +130,22 @@ export default function Home() {
                 <ArticleCard key={article.id} article={article} />
               ))}
             </div>
-          </section>
+          </section>*/}
+
+          {/* Featured Articles Section */}
+<section className="mb-16">
+  <div className="flex justify-between items-center mb-8">
+    <h2 className="text-2xl font-bold text-gray-800">Featured Articles</h2>
+    <Link href="/blog" className="text-blue-600 hover:underline font-medium">
+      View All Articles
+    </Link>
+  </div>
+  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+    {articles.map((article) => (
+      <ArticleCard key={article.id} article={article} />
+    ))}
+  </div>
+</section>
 
           {/* Categories Section */}
           <section className="mb-16">

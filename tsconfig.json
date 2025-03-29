@@ -12,6 +12,7 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "types": ["next/types/global"],
     "jsx": "preserve",
     "incremental": true,
     "plugins": [
