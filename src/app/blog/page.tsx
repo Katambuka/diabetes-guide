@@ -2,7 +2,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { FiClock, FiCalendar, FiTag } from 'react-icons/fi'
-import { allBlogPosts } from '@/data/page' 
+import { allBlogPosts } from '@/data/index' 
+
 
 
 export default function BlogPage() {
