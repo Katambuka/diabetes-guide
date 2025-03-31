@@ -1,0 +1,51 @@
+---
+id: 2
+slug: "nutrition-guide"
+title: "Diabetes Nutrition Guide"
+excerpt: "Essential nutrition tips for managing blood sugar levels"
+category: "Nutrition"
+date: "2023-02-20"
+readTime: "7 min read"
+author: "Nutritionist Mark Williams"
+authorBio: "Registered dietitian specializing in diabetes care"
+tags:
+  - "nutrition"
+  - "diet"
+  - "meal planning"
+image: "/images/nutrition-guide.jpg"
+---
+
+<section class="prose max-w-none">
+  <h2>Key Nutrition Principles</h2>
+  <p>Eating right is crucial for diabetes management. Focus on:</p>
+  
+  <h3>Carbohydrate Counting</h3>
+  <p>Monitor your carb intake to maintain stable blood sugar levels.</p>
+  
+  <h3>Healthy Plate Method</h3>
+  <ul>
+    <li>50% non-starchy vegetables</li>
+    <li>25% lean protein</li>
+    <li>25% whole grains</li>
+  </ul>
+
+  <h2>Recommended Foods</h2>
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <h3>Best Choices</h3>
+      <ul>
+        <li>Leafy greens</li>
+        <li>Whole grains</li>
+        <li>Lean proteins</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Limit These</h3>
+      <ul>
+        <li>Sugary drinks</li>
+        <li>Processed snacks</li>
+        <li>Fried foods</li>
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,38 @@
+---
+id: 1
+slug: "understanding-diabetes"
+title: "Understanding Type 2 Diabetes"
+excerpt: "Learn the fundamentals of Type 2 Diabetes and how to manage it"
+category: "Diabetes Basics"
+date: "2023-01-15"
+readTime: "5 min read"
+author: "Dr. Sarah Johnson"
+authorBio: "Endocrinologist with 10 years of experience"
+tags:
+  - "diabetes"
+  - "health"
+  - "type 2"
+image: "/images/diabetes-basics.jpg"
+---
+
+<section class="prose max-w-none">
+  <h2>What is Type 2 Diabetes?</h2>
+  <p>Type 2 diabetes is a chronic condition that affects the way your body metabolizes sugar (glucose) — an important source of fuel for your body.</p>
+
+  <h2>Symptoms to Watch For</h2>
+  <ul>
+    <li>Increased thirst and frequent urination</li>
+    <li>Increased hunger</li>
+    <li>Fatigue</li>
+    <li>Blurred vision</li>
+  </ul>
+
+  <h2>Management Strategies</h2>
+  <p>Effective management includes:</p>
+  <ol>
+    <li>Healthy eating</li>
+    <li>Regular exercise</li>
+    <li>Blood sugar monitoring</li>
+    <li>Medication when needed</li>
+  </ol>
+</section>

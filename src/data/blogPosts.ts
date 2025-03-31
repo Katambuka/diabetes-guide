@@ -1,4 +1,5 @@
-/*export const blogPosts = [
+/*import { blogPosts } from './blogPosts';
+export const blogPosts = [
 
    {
      slug: "type-2-diabetes",
@@ -85,7 +86,7 @@ UK Prospective Diabetes Study (UKPDS) Group. Lancet. 1998. ↩]</p> so where do 
 /*
 import { BlogPost } from "../../types/blog";
 
-export const BlogPosts: BlogPost[] = [
+const BlogPosts: BlogPost[] = [
   {
     slug: "understanding-type-2-diabetes",
     title: "Understanding Type 2 Diabetes: Causes, Symptoms, and Management",
@@ -129,7 +130,8 @@ export const BlogPosts: BlogPost[] = [
         <p>Focus on complex carbohydrates with low glycemic index and adequate fiber content.</p>
         
         <h3>2. Healthy Fats</h3>
-        <p>Incorporate monounsaturated and polyunsaturated fats while limiting saturated and trans fats.</p>
+        <p>Incorporate
+ monounsaturated and polyunsaturated fats while limiting saturated and trans fats.</p>
       </section>
       
       <section class="meal-planning">
@@ -146,8 +148,8 @@ export const BlogPosts: BlogPost[] = [
     readTime: "6 min read"
   }
 ];*/
-
-import { BlogPost } from "../../types/blog";
+/*
+import type { BlogPost } from "../../types/blog";
 
 export const BlogPosts: BlogPost[] = [
   {
@@ -382,3 +384,284 @@ export const BlogPosts: BlogPost[] = [
     author: ""
   }
 ];
+
+*/
+/*
+import fs from 'fs';
+import path from 'path';
+import yaml from 'js-yaml';
+import matter from 'gray-matter';
+
+const postsDirectory = path.join(process.cwd(), 'src/content/posts');
+
+export const getAllPosts = (): BlogPost[] => {
+  const fileNames = fs.readdirSync(postsDirectory);
+  
+  return fileNames.map(fileName => {
+    const filePath = path.join(postsDirectory, fileName);
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    
+    const { data: frontmatter, content } = matter(fileContents, {
+      engines: {
+        yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object
+      }
+    });
+
+    return {
+      ...frontmatter,
+      content,
+      image: frontmatter.image || `/images/image${(frontmatter.id ?? 0) % 2 === 0 ? '8' : '6'}.jpg`
+    } as BlogPost;
+  });
+};
+
+export const getPostBySlug = (slug: string): BlogPost | undefined => {
+  try {
+    const filePath = path.join(postsDirectory, `${slug}.yaml`);
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    
+    const { data: frontmatter, content } = matter(fileContents, {
+      engines: {
+        yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object
+      }
+    });
+
+    return {
+      ...frontmatter,
+      content,
+      image: frontmatter.image || `/images/image${frontmatter.id % 2 === 0 ? '8' : '6'}.jpg`
+    } as BlogPost;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (error) {
+    return undefined;
+  }
+};
+
+export const BlogPosts = getAllPosts();*/
+/*
+import fs from 'fs';
+import path from 'path';
+import yaml from 'js-yaml';
+import matter from 'gray-matter';
+import type { BlogPost } from '../../types/blog';
+
+
+const postsDirectory = path.join(process.cwd(), 'src/content/posts');
+
+function safeReadDirectory(dir: string): string[] {
+  try {
+    return fs.readdirSync(dir);
+  } catch (error) {
+    console.error(`Error reading directory ${dir}:`, error);
+    return [];
+  }
+}
+
+function safeReadFile(filePath: string): string | null {
+  try {
+    return fs.readFileSync(filePath, 'utf8');
+  } catch (error) {
+    console.error(`Error reading file ${filePath}:`, error);
+    return null;
+  }
+}
+
+function parsePostContent(fileContents: string): { frontmatter: Partial<BlogPost>, content: string } | null {
+  try {
+    const parsed = matter(fileContents, {
+      engines: {
+        yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object
+      }
+    });
+    return { frontmatter: parsed.data as Partial<BlogPost>, content: parsed.content };
+  } catch (error) {
+    console.error('Error parsing YAML frontmatter:', error);
+    return null;
+  }
+}
+
+function validatePost(post: Partial<BlogPost>): post is BlogPost {
+  return (
+    typeof post.id === 'number' &&
+    typeof post.slug === 'string' &&
+    typeof post.title === 'string' &&
+    typeof post.content === 'string' &&
+    typeof post.category === 'string' &&
+    typeof post.date === 'string' &&
+    typeof post.readTime === 'string'
+  );
+}
+
+export const getAllPosts = (): BlogPost[] => {
+  const fileNames = safeReadDirectory(postsDirectory);
+  
+  return fileNames.reduce((posts: BlogPost[], fileName) => {
+    if (!fileName.endsWith('.yaml') && !fileName.endsWith('.yml')) {
+      return posts;
+    }
+
+    const filePath = path.join(postsDirectory, fileName);
+    const fileContents = safeReadFile(filePath);
+
+    if (!fileContents) return posts;
+
+    const parsed = parsePostContent(fileContents);
+    if (!parsed) return posts;
+
+    const { frontmatter, content } = parsed;
+    const post = {
+      ...frontmatter,
+      content,
+      image: frontmatter.image || `/images/image${(frontmatter.id ?? 0)  === 0 ? '8' : '6'}.jpg`
+    };
+
+    return validatePost(post) ? [...posts, post] : posts;
+  }, []);
+};
+
+export const getPostBySlug = (slug: string): BlogPost | undefined => {
+  const possibleExtensions = ['.yaml', '.yml'];
+  
+  for (const ext of possibleExtensions) {
+    const filePath = path.join(postsDirectory, `${slug}${ext}`);
+    if (!fs.existsSync(filePath)) continue;
+
+    const fileContents = safeReadFile(filePath);
+    if (!fileContents) return undefined;
+
+    const parsed = parsePostContent(fileContents);
+    if (!parsed) return undefined;
+
+    const { frontmatter, content } = parsed;
+    const post = {
+      ...frontmatter,
+      content,
+      image: frontmatter.image || `/images/image${(frontmatter.id ?? 0)  === 0 ? '8' : '6'}.jpg`
+    };
+
+    return validatePost(post) ? post : undefined;
+  }
+
+  return undefined;
+};
+
+// Cache posts in development for better performance
+let cachedPosts: BlogPost[] | null = null;
+
+export const BlogPosts = ((): BlogPost[] => {
+  if (process.env.NODE_ENV === 'development' && cachedPosts) {
+    return cachedPosts;
+  }
+  const posts = getAllPosts();
+  if (process.env.NODE_ENV === 'development') {
+    cachedPosts = posts;
+  }
+  return posts;
+})();*/
+import fs from 'fs';
+import path from 'path';
+import yaml from 'js-yaml';
+import matter from 'gray-matter';
+import { BlogPost } from '@/types/blog';
+
+const postsDirectory = path.join(process.cwd(), 'src/content/posts');
+
+function safeReadYamlFile(filePath: string) {
+  try {
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    return matter(fileContents, {
+      engines: {
+        yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object
+      },
+      excerpt: true
+    });
+  } catch (error) {
+    console.error(`Error parsing YAML file ${filePath}:`, error);
+    return null;
+  }
+}
+
+export function getAllPosts(): BlogPost[] {
+  if (!fs.existsSync(postsDirectory)) {
+    fs.mkdirSync(postsDirectory, { recursive: true });
+    return [];
+  }
+
+  const fileNames = fs.readdirSync(postsDirectory)
+    .filter(file => file.endsWith('.yaml') || file.endsWith('.yml'));
+
+  return fileNames.reduce((posts: BlogPost[], fileName) => {
+    const filePath = path.join(postsDirectory, fileName);
+    const result = safeReadYamlFile(filePath);
+
+    if (!result) return posts;
+
+    const { data: frontmatter, content } = result;
+
+    // Validate required fields
+    if (!frontmatter.id || !frontmatter.slug || !frontmatter.title) {
+      console.warn(`Skipping invalid post ${fileName} - missing required fields`);
+      return posts;
+    }
+
+    const post: BlogPost = {
+      id: frontmatter.id,
+      slug: frontmatter.slug,
+      title: frontmatter.title,
+      excerpt: frontmatter.excerpt || '',
+      content: content || '',
+      image: frontmatter.image || `/images/image${frontmatter.id % 2 === 0 ? '8' : '6'}.jpg`,
+      category: frontmatter.category || 'Uncategorized',
+      date: frontmatter.date 
+        ? new Date(frontmatter.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })
+        : 'Unknown date',
+      readTime: frontmatter.readTime || '5 min read',
+      ...(frontmatter.author && { author: frontmatter.author }),
+      ...(frontmatter.authorBio && { authorBio: frontmatter.authorBio }),
+      ...(frontmatter.tags && { tags: frontmatter.tags })
+    };
+
+    return [...posts, post];
+  }, []).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
+
+export function getPostBySlug(slug: string): BlogPost | undefined {
+  const possibleExtensions = ['.yaml', '.yml'];
+  
+  for (const ext of possibleExtensions) {
+    const filePath = path.join(postsDirectory, `${slug}${ext}`);
+    if (fs.existsSync(filePath)) {
+      const result = safeReadYamlFile(filePath);
+      if (!result) return undefined;
+
+      const { data: frontmatter, content } = result;
+      return {
+        id: frontmatter.id,
+        slug: frontmatter.slug,
+        title: frontmatter.title,
+        excerpt: frontmatter.excerpt || '',
+        content: content || '',
+        image: frontmatter.image || `/images/image${frontmatter.id % 2 === 0 ? '8' : '6'}.jpg`,
+        category: frontmatter.category || 'Uncategorized',
+        date: frontmatter.date 
+          ? new Date(frontmatter.date).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })
+          : 'Unknown date',
+        readTime: frontmatter.readTime || '5 min read',
+        ...(frontmatter.author && { author: frontmatter.author }),
+        ...(frontmatter.authorBio && { authorBio: frontmatter.authorBio }),
+        ...(frontmatter.tags && { tags: frontmatter.tags })
+      };
+    }
+  }
+  return undefined;
+}
+
+export const BlogPosts = getAllPosts();

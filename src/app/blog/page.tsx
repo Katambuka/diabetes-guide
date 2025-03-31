@@ -1,4 +1,4 @@
-'use client';
+/*'use client';
 import Link from 'next/link'
 import Image from 'next/image'
 import { FiClock, FiCalendar, FiTag } from 'react-icons/fi'
@@ -10,7 +10,7 @@ export default function BlogPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Blog Header */}
+        {/* Blog Header /}
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">Diabetes Health Blog</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -18,7 +18,7 @@ export default function BlogPage() {
           </p>
         </div>
 
-        {/* Categories Filter */}
+        {/* Categories Filter /}
         <div className="flex flex-wrap gap-3 mb-12 justify-center">
           <button className="px-4 py-2 bg-blue-600 text-white rounded-full text-sm font-medium">
             All Topics
@@ -37,7 +37,7 @@ export default function BlogPage() {
           </button>
         </div>
 
-        {/* Blog Posts Grid */}
+        {/* Blog Posts Grid /}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           {allBlogPosts.map((post) => (
             <article 
@@ -89,7 +89,7 @@ export default function BlogPage() {
           ))}
         </div>
 
-        {/* Pagination */}
+        {/* Pagination /}
         <div className="flex justify-center mb-16">
           <nav className="flex items-center space-x-2">
             <button className="px-4 py-2 rounded-md bg-blue-600 text-white font-medium">
@@ -107,7 +107,7 @@ export default function BlogPage() {
           </nav>
         </div>
 
-        {/* Newsletter CTA */}
+        {/* Newsletter CTA /}
         <div className="bg-white rounded-xl p-8 shadow-md">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Stay Updated on Diabetes Care</h2>
@@ -132,5 +132,47 @@ export default function BlogPage() {
       </div>
     </main>
   )
+}*/
+
+import { getAllPosts } from '@/data/blogPosts';
+import Link from 'next/link';
+import Image from 'next/image';
+
+export default function BlogPage() {
+  const posts = getAllPosts();
+  
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-8">Diabetes Blog</h1>
+      
+      <div className="grid gap-8 md:grid-cols-2">
+        {posts.map(post => (
+          <article key={post.id} className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+            <Link href={`/blog/${post.slug}`}>
+              <div className="relative h-48">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-6">
+                <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs mb-3">
+                  {post.category}
+                </span>
+                <h2 className="text-xl font-bold mb-2 hover:underline">{post.title}</h2>
+                <p className="text-gray-600 mb-3">{post.excerpt}</p>
+                <div className="flex items-center justify-between text-sm text-gray-500">
+                  <span>{post.date}</span>
+                  <span>{post.readTime}</span>
+                </div>
+              </div>
+            </Link>
+          </article>
+        ))}
+      </div>
+    </div>
+  );
 }
 

@@ -13,7 +13,7 @@ const articles = [
     id: 1,
     title: "Understanding Diabetes: Types and Symptoms",
     excerpt: "Learn about the different types of diabetes...",
-    slug: "understanding-type-2-diabetes", 
+    slug: "understanding-type-2-diabetes",
     image: "/images/image6.jpg",
     category: "Diabetes Basics",
     readTime: "5 min read"
@@ -22,8 +22,8 @@ const articles = [
     id: 2,
     title: "Healthy Eating for Diabetics: A Complete Guide",
     excerpt: "Discover the best foods to eat...",
-    slug: "foods-for-blood-sugar-control", 
-    image: "/images/image8.jpg", 
+    slug: "foods-for-blood-sugar-control",
+    image: "/images/image8.jpg",
     category: "Nutrition",
     readTime: "8 min read"
   },
@@ -31,7 +31,7 @@ const articles = [
     id: 3,
     title: "Exercise and Diabetes: Creating Your Fitness Plan",
     excerpt: "Learn how physical activity affects...",
-    slug: "exercise-for-diabetics", 
+    slug: "exercise-for-diabetics",
     image: "/images/image6.jpg",
     category: "Lifestyle",
     readTime: "6 min read"
@@ -40,7 +40,7 @@ const articles = [
     id: 4,
     title: "Monitoring Blood Sugar: Devices and Techniques",
     excerpt: "Everything you need to know about...",
-    slug: "diabetes-technology", 
+    slug: "diabetes-technology",
     image: "/images/image8.jpg",
     category: "Management",
     readTime: "7 min read"
@@ -71,10 +71,10 @@ export default function Home() {
             </div>
           </div>
           <div className="md:w-1/2 flex justify-center">
-            <Image 
-              src="/images/image1.jpg" 
-              alt="Happy person managing diabetes" 
-              width={500} 
+            <Image
+              src="/images/image1.jpg"
+              alt="Happy person managing diabetes"
+              width={500}
               height={500}
               className="rounded-lg shadow-xl"
               priority
@@ -114,48 +114,35 @@ export default function Home() {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4 text-gray-800">Welcome to Diabetes Guide</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We are here to support you with evidence-based information, practical tips, and a 
+              We are here to support you with evidence-based information, practical tips, and a
               compassionate community to help you navigate life with diabetes.
             </p>
           </div>
 
-          {/* Featured Articles /}
+          {/* Featured Articles Section */}
           <section className="mb-16">
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-2xl font-bold text-gray-800">Featured Articles</h2>
-              <Link href="#" className="text-blue-600 hover:underline font-medium">View All Articles</Link>
+              <Link href="/blog" className="text-blue-600 hover:underline font-medium">
+                View All Articles
+              </Link>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {articles.map((article) => (
                 <ArticleCard key={article.id} article={article} />
               ))}
             </div>
-          </section>*/}
-
-          {/* Featured Articles Section */}
-<section className="mb-16">
-  <div className="flex justify-between items-center mb-8">
-    <h2 className="text-2xl font-bold text-gray-800">Featured Articles</h2>
-    <Link href="/blog" className="text-blue-600 hover:underline font-medium">
-      View All Articles
-    </Link>
-  </div>
-  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-    {articles.map((article) => (
-      <ArticleCard key={article.id} article={article} />
-    ))}
-  </div>
-</section>
+          </section>
 
           {/* Categories Section */}
           <section className="mb-16">
-        <h2 className="text-2xl font-bold text-gray-800 mb-8">Explore by Category</h2>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {categories.map((category) => (
-            <CategoryLink key={category.slug} category={category} />
-          ))}
-        </div>
-        </section>
+            <h2 className="text-2xl font-bold text-gray-800 mb-8">Explore by Category</h2>
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {categories.map((category) => (
+                <CategoryLink key={category.slug} category={category} />
+              ))}
+            </div>
+          </section>
 
           {/* Testimonial Section */}
           <section className="bg-blue-600 text-white rounded-xl p-8 mb-16">
@@ -164,14 +151,14 @@ export default function Home() {
                 <span className="text-5xl mr-4"> "</span>
                 <div>
                   <blockquote className="text-xl mb-6">
-                    The Diabetes Guide helped me understand my condition better than my doctor ever explained. 
+                    The Diabetes Guide helped me understand my condition better than my doctor ever explained.
                     The meal plans and exercise tips have brought my A1C down to normal levels for the first time in years.
                   </blockquote>
                   <div className="flex items-center">
-                    <Image 
-                      src="/images/image1.jpg" 
-                      alt="Sarah J." 
-                      width={60} 
+                    <Image
+                      src="/images/image1.jpg"
+                      alt="Sarah J."
+                      width={60}
                       height={60}
                       className="rounded-full mr-4"
                     />
@@ -193,9 +180,9 @@ export default function Home() {
                 Get the latest diabetes management tips, recipes, and research updates delivered to your inbox weekly.
               </p>
               <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-                <input 
-                  type="email" 
-                  placeholder="Your email address" 
+                <input
+                  type="email"
+                  placeholder="Your email address"
                   className="flex-grow px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
@@ -212,4 +199,3 @@ export default function Home() {
     </>
   );
 }
-  
