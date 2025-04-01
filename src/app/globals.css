@@ -31,14 +31,19 @@ body {
 }
 
 
-img {
+image {
   width: 100%;
   display: block;
 } 
 
+h1,h2,h3 {
+  font-family: var(--font-sans);
+  color: var(--primary);
+}
 
 p {
   margin: 1rem 0;
+  color: #0a0a0a;
 }
 
 ul {
