@@ -1,0 +1,77 @@
+---
+id: 8
+title: "Understanding Gestational Diabetes"
+excerpt: "An in-depth look at gestational diabetes and its impact on mothers and babies."
+slug: "gestational-diabetes"
+image: "/images/image11.jpg"
+category: "Diabetes Basics"
+readTime: "5 min read"
+date: "2023-09-01"
+author: "Dr. Olivia Park"
+authorBio: "OB-GYN specializing in high-risk pregnancies"
+tags: ["gestational", "pregnancy", "diabetes"]
+---
+
+<section class="prose max-w-none">
+  <h2>What is Gestational Diabetes?</h2>
+  <p>Gestational diabetes mellitus (GDM) develops when pregnancy hormones interfere with insulin function, typically around 24-28 weeks.</p>
+  
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <h3>Key Facts</h3>
+      <ul>
+        <li>Affects 2-10% of pregnancies</li>
+        <li>Usually resolves after delivery</li>
+        <li>Increases future type 2 diabetes risk</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Risk Factors</h3>
+      <ul>
+        <li>Age over 25</li>
+        <li>Family history of diabetes</li>
+        <li>Overweight/obesity</li>
+        <li>Previous GDM</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Risks to Mother and Baby</h2>
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <h3>For Baby</h3>
+      <ul>
+        <li>Macrosomia (excessive birth weight)</li>
+        <li>Preterm birth</li>
+        <li>Neonatal hypoglycemia</li>
+        <li>Respiratory distress</li>
+      </ul>
+    </div>
+    <div>
+      <h3>For Mother</h3>
+      <ul>
+        <li>Preeclampsia</li>
+        <li>Increased C-section risk</li>
+        <li>Future type 2 diabetes</li>
+        <li>Recurrence in future pregnancies</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Management Approaches</h2>
+  <ol>
+    <li><strong>Blood glucose monitoring:</strong> 4+ times daily (fasting + postprandial)</li>
+    <li><strong>Medical nutrition therapy:</strong> 30-45g carbs per meal, low glycemic index</li>
+    <li><strong>Exercise:</strong> 30 minutes daily moderate activity</li>
+    <li><strong>Medication:</strong> Insulin if needed (10-20% of cases)</li>
+  </ol>
+
+  <h2>Postpartum Follow-Up</h2>
+  <ul>
+    <li>75g OGTT at 6-12 weeks postpartum</li>
+    <li>Annual diabetes screening</li>
+    <li>Breastfeeding encouraged</li>
+    <li>Weight management</li>
+    <li>Preconception counseling</li>
+  </ul>
+</section>

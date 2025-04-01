@@ -1,6 +1,8 @@
 // src/types/blog.d.ts
 declare module '@/types/blog' {
   export interface BlogPost {
+    likes: number;
+    dislikes: number;
     id: number;
     slug: string;
     title: string;

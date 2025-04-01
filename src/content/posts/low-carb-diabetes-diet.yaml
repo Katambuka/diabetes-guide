@@ -1,0 +1,43 @@
+---
+id: 10
+slug: "low-carb-diabetes-diet"
+title: "Low-Carb Diet for Diabetes Management"
+excerpt: "Explore how reducing carbohydrate intake can help stabilize blood sugar levels."
+category: "Nutrition"
+date: "2023-10-05"
+readTime: "8 min read"
+author: "Nutritionist Mark Williams"
+authorBio: "Registered dietitian specializing in diabetes care"
+tags: ["keto", "low-carb", "diet"]
+image: "/images/image8.jpg"
+---
+
+<section class="prose">
+  <h2>Benefits of Low-Carb Eating</h2>
+  <p>A 2022 study showed diabetics on low-carb diets experienced:</p>
+  <ul>
+    <li>23% lower fasting glucose levels</li>
+    <li>Reduced HbA1c by 1.5% on average</li>
+    <li>Decreased medication requirements</li>
+  </ul>
+
+  <h2>Best Low-Carb Foods</h2>
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <h3>Proteins</h3>
+      <ul>
+        <li>Salmon</li>
+        <li>Chicken</li>
+        <li>Eggs</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Vegetables</h3>
+      <ul>
+        <li>Broccoli</li>
+        <li>Spinach</li>
+        <li>Zucchini</li>
+      </ul>
+    </div>
+  </div>
+</section>

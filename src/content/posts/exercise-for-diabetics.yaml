@@ -1,0 +1,47 @@
+---
+id: 3
+title: "Exercise Routines for Diabetics"
+excerpt: "Safe and effective workouts tailored for people with diabetes."
+slug: "exercise-for-diabetics"
+image: "/images/image12.jpg"
+category: "Lifestyle"
+readTime: "6 min read"
+date: "2023-06-18"
+author: "Dr. Emily Chen"
+authorBio: "Exercise physiologist specializing in metabolic conditions"
+tags: ["fitness", "workouts", "activity"]
+---
+
+<section class="prose max-w-none">
+  <h2>Why Exercise Matters</h2>
+  <p>Regular physical activity can lower blood sugar levels by:</p>
+  <ul>
+    <li>Increasing insulin sensitivity by up to 50%</li>
+    <li>Helping muscles use glucose without insulin</li>
+    <li>Reducing visceral fat (belly fat)</li>
+  </ul>
+
+  <h2>Recommended Weekly Routine</h2>
+  <div class="grid grid-cols-3 gap-4">
+    <div class="bg-blue-50 p-4 rounded-lg">
+      <h3>Monday</h3>
+      <p>30 min brisk walking</p>
+    </div>
+    <div class="bg-blue-50 p-4 rounded-lg">
+      <h3>Wednesday</h3>
+      <p>Strength training (bodyweight exercises)</p>
+    </div>
+    <div class="bg-blue-50 p-4 rounded-lg">
+      <h3>Friday</h3>
+      <p>Swimming or cycling</p>
+    </div>
+  </div>
+
+  <h2>Safety Precautions</h2>
+  <ol>
+    <li>Check blood sugar before and after exercise</li>
+    <li>Carry fast-acting carbs in case of lows</li>
+    <li>Stay hydrated</li>
+    <li>Wear proper footwear</li>
+  </ol>
+</section>

@@ -1,0 +1,56 @@
+---
+id: 7
+title: "Meal Planning for Diabetics"
+excerpt: "Tips and tricks for creating balanced and delicious meal plans."
+slug: "meal-planning-for-diabetics"
+image: "/images/image10.jpg"
+category: "Nutrition"
+readTime: "6 min read"
+date: "2023-08-20"
+author: "Chef Maria Gonzalez"
+authorBio: "Certified diabetes educator and culinary specialist"
+tags: ["meal planning", "recipes", "nutrition"]
+---
+
+<section class="prose max-w-none">
+  <h2>The Plate Method</h2>
+  <p>ADA-recommended approach for balanced meals:</p>
+  <div class="flex justify-center">
+    <div class="relative w-64 h-64">
+      <!-- Plate visualization -->
+      <div class="absolute inset-0 rounded-full border-8 border-gray-200"></div>
+      <div class="absolute top-0 left-0 w-full h-1/2 bg-green-100 rounded-t-full"></div>
+      <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-blue-100 rounded-bl-full"></div>
+      <div class="absolute bottom-0 right-0 w-1/2 h-1/2 bg-yellow-100 rounded-br-full"></div>
+    </div>
+  </div>
+  <ul>
+    <li><strong>50% plate:</strong> Non-starchy vegetables</li>
+    <li><strong>25% plate:</strong> Lean protein</li>
+    <li><strong>25% plate:</strong> Whole grains/starchy vegetables</li>
+  </ul>
+
+  <h2>Sample Meal Plan</h2>
+  <div class="grid grid-cols-3 gap-4">
+    <div class="bg-yellow-50 p-3 rounded-lg">
+      <h3>Breakfast</h3>
+      <p>Greek yogurt with berries and nuts</p>
+    </div>
+    <div class="bg-yellow-50 p-3 rounded-lg">
+      <h3>Lunch</h3>
+      <p>Grilled chicken salad with quinoa</p>
+    </div>
+    <div class="bg-yellow-50 p-3 rounded-lg">
+      <h3>Dinner</h3>
+      <p>Salmon with roasted veggies</p>
+    </div>
+  </div>
+
+  <h2>Carb Counting Basics</h2>
+  <p>Standard diabetic meal = 45-60g carbs:</p>
+  <ul>
+    <li>1 slice bread = 15g</li>
+    <li>1 small fruit = 15g</li>
+    <li>1/2 cup cooked grains = 15g</li>
+  </ul>
+</section>

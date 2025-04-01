@@ -1,0 +1,59 @@
+---
+id: 6
+title: "Diabetes Technology: CGMs and Insulin Pumps"
+excerpt: "A look into the latest technology available to help manage diabetes effectively."
+slug: "diabetes-technology"
+image: "/images/image9.jpg"
+category: "Tech"
+readTime: "9 min read"
+date: "2023-08-05"
+author: "Dr. Alan Turing"
+authorBio: "Biomedical engineer specializing in diabetes tech"
+tags: ["technology", "CGM", "insulin pump"]
+---
+
+<section class="prose max-w-none">
+  <h2>Continuous Glucose Monitors (CGMs)</h2>
+  <p>Modern CGMs like Dexcom G7 and Freestyle Libre 3 offer:</p>
+  <ul>
+    <li>Real-time glucose readings every 1-5 minutes</li>
+    <li>Trend arrows showing direction of change</li>
+    <li>Alerts for highs and lows</li>
+    <li>Integration with smartphones</li>
+  </ul>
+
+  <h2>Insulin Pump Advancements</h2>
+  <div class="space-y-4">
+    <div>
+      <h3>Closed-Loop Systems</h3>
+      <p>Devices like Tandem Control-IQ automatically adjust insulin delivery based on CGM readings.</p>
+    </div>
+    <div>
+      <h3>Patch Pumps</h3>
+      <p>Omnipod's tubeless design offers more flexibility and discretion.</p>
+    </div>
+  </div>
+
+  <h2>Comparing Top Systems</h2>
+  <table class="table-auto">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>CGM</th>
+        <th>Pump</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Wear Time</td>
+        <td>10-14 days</td>
+        <td>2-3 days</td>
+      </tr>
+      <tr>
+        <td>Accuracy</td>
+        <td>±10%</td>
+        <td>N/A</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

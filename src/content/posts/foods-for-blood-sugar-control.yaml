@@ -1,0 +1,57 @@
+---
+id: 2
+title: "Best Foods for Blood Sugar Control"
+excerpt: "Discover the top foods that help maintain stable glucose levels."
+slug: "foods-for-blood-sugar-control"
+image: "/images/image5.jpg"
+category: "Nutrition"
+readTime: "8 min read"
+date: "2023-06-02"
+author: "Nutritionist Mark Williams"
+authorBio: "Registered dietitian specializing in diabetes care"
+tags: ["diet", "nutrition", "meal planning"]
+---
+
+<section class="prose max-w-none">
+  <h2>The Glycemic Index Explained</h2>
+  <p>Foods with low glycemic index (GI) values (55 or less) are digested more slowly, causing a gradual rise in blood sugar:</p>
+  
+  <table class="table-auto">
+    <thead>
+      <tr>
+        <th>Food</th>
+        <th>GI Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Steel-cut oats</td>
+        <td>42</td>
+      </tr>
+      <tr>
+        <td>Lentils</td>
+        <td>32</td>
+      </tr>
+      <tr>
+        <td>Most non-starchy vegetables</td>
+        <td>15-30</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Top 5 Blood Sugar-Friendly Foods</h2>
+  <div class="space-y-4">
+    <div>
+      <h3>1. Leafy Greens</h3>
+      <p>Spinach, kale, and Swiss chard are packed with magnesium, which helps with insulin sensitivity.</p>
+    </div>
+    <div>
+      <h3>2. Fatty Fish</h3>
+      <p>Salmon and mackerel provide omega-3s that reduce inflammation and improve metabolic health.</p>
+    </div>
+    <div>
+      <h3>3. Nuts and Seeds</h3>
+      <p>Almonds and chia seeds offer healthy fats and fiber to slow glucose absorption.</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+---
+id: 1
+title: "Understanding Type 2 Diabetes"
+excerpt: "Learn about the causes, symptoms, and management of type 2 diabetes."
+slug: "understanding-type-2-diabetes"
+image: "/images/image6.jpg"
+category: "Diabetes Basics"
+readTime: "5 min read"
+date: "2023-05-15"
+author: "Dr. Sarah Johnson"
+authorBio: "Endocrinologist with 15 years of clinical experience"
+tags: ["type 2", "symptoms", "diagnosis"]
+---
+
+<section class="prose max-w-none">
+  <h2>What is Type 2 Diabetes?</h2>
+  <p>Type 2 diabetes is a chronic metabolic disorder characterized by insulin resistance and impaired insulin secretion. Unlike type 1 diabetes, it typically develops in adulthood and is strongly associated with lifestyle factors.</p>
+
+  <h2>Key Symptoms</h2>
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <h3>Common Signs</h3>
+      <ul>
+        <li>Increased thirst and urination</li>
+        <li>Unexplained weight loss</li>
+        <li>Fatigue</li>
+        <li>Blurred vision</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Less Common Signs</h3>
+      <ul>
+        <li>Slow-healing wounds</li>
+        <li>Recurrent infections</li>
+        <li>Tingling in hands/feet</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Management Strategies</h2>
+  <ol>
+    <li><strong>Blood sugar monitoring:</strong> Regular checks help track progress</li>
+    <li><strong>Healthy diet:</strong> Focus on whole foods and portion control</li>
+    <li><strong>Physical activity:</strong> 150 minutes of moderate exercise weekly</li>
+    <li><strong>Medication:</strong> When lifestyle changes aren't enough</li>
+  </ol>
+</section>

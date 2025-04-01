@@ -1,10 +1,4 @@
 @import "tailwindcss";
-@tailwind utilities;
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
 :root {
   --background: #ffffff;
@@ -52,7 +46,6 @@ ul {
 }
 
 
-/* Responsive Utilities */
 @media (min-width: 640px) {
   .sm\:text-center {
     text-align: center;
@@ -159,7 +152,7 @@ ul li:hover {
 }
 
 nav a {
-  color: white;
+  color: #4299e1;
   padding: 0.5rem 1rem;
   display: inline-block;
   transition: background-color 0.3s ease;
@@ -167,6 +160,7 @@ nav a {
 
 nav a:hover {
   background-color: #3182ce;
+  color: white;
   border-radius: 0.25rem;
 }
 
@@ -191,7 +185,7 @@ footer a {
   font-weight: bold;
   text-align: center;
   color: rgb(8, 7, 7);
-  background-color: #4299e1; /* Blue background */
+  background-color: #4299e1;
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -199,16 +193,16 @@ footer a {
 }
 
 .button:hover {
-  background-color: #3182ce; /* Darker blue on hover */
+  background-color: #3182ce; 
 }
 
 .button-secondary {
-  background-color: #051d3c; /* Light gray background */
-  color: #0a0a0b; /* Dark gray text */
+  background-color: #051d3c; 
+  color: #0a0a0b; 
 }
 
 .button-secondary:hover {
-  background-color: #cbd5e0; /* Slightly darker gray on hover */
+  background-color: #cbd5e0; 
 }
 
 /* Card Styles */
@@ -229,7 +223,7 @@ footer a {
 .card img {
   width: 100%;
   height: 200px; 
-  object-fit: cover; /* Ensures images cover the area without distortion */
+  /*object-fit: cover; */
 }
 
 .card-content {

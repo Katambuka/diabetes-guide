@@ -1,0 +1,31 @@
+---
+id: 11
+slug: "diabetes-foot-care"
+title: "Diabetes Foot Care Essentials"
+excerpt: "Proper foot care techniques to prevent complications from diabetes."
+category: "Health Basics"
+date: "2023-10-20"
+readTime: "5 min read"
+author: "Dr. Sarah Johnson"
+authorBio: "Podiatrist specializing in diabetic foot care"
+tags: ["foot care", "prevention", "complications"]
+image: "/images/image7.jpg"
+---
+
+<section class="prose">
+  <h2>Why Foot Care Matters</h2>
+  <p>Diabetes can cause nerve damage (neuropathy) and poor circulation, making feet vulnerable to:</p>
+  <ul>
+    <li>Infections</li>
+    <li>Ulcers</li>
+    <li>Slow-healing wounds</li>
+  </ul>
+
+  <h2>Daily Foot Care Routine</h2>
+  <ol>
+    <li>Wash feet daily with lukewarm water</li>
+    <li>Inspect for cuts/blisters (use mirror if needed)</li>
+    <li>Moisturize (but not between toes)</li>
+    <li>Wear clean, dry socks</li>
+  </ol>
+</section>

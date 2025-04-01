@@ -1,0 +1,43 @@
+---
+id: 12
+slug: "intermittent-fasting-diabetes"
+title: "Intermittent Fasting and Diabetes"
+excerpt: "Examining the benefits and risks of intermittent fasting for blood sugar control."
+category: "Nutrition"
+date: "2023-11-05"
+readTime: "7 min read"
+author: "Dr. Michael Chen"
+authorBio: "Endocrinologist researching metabolic therapies"
+tags: ["fasting", "time-restricted eating", "metabolism"]
+image: "/images/image10.jpg"
+---
+
+<section class="prose">
+  <h2>Potential Benefits</h2>
+  <p>When done properly, intermittent fasting may help:</p>
+  <ul>
+    <li>Improve insulin sensitivity</li>
+    <li>Promote weight loss</li>
+    <li>Lower inflammation markers</li>
+  </ul>
+
+  <h2>Safe Fasting Approaches</h2>
+  <table class="table-auto">
+    <thead>
+      <tr>
+        <th>Method</th>
+        <th>Eating Window</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>16:8</td>
+        <td>8 hours</td>
+      </tr>
+      <tr>
+        <td>14:10</td>
+        <td>10 hours</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
