@@ -48,8 +48,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
         <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2 mb-3">
           {article.excerpt}
         </p>
-
-        {/* Footer - More Minimalist */}
+  
         <div className="flex items-center justify-between">
           <div className="flex items-center text-xs text-gray-500 dark:text-gray-400">
             <FiClock className="mr-1 h-3 w-3" />
