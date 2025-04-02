@@ -14,9 +14,5 @@ export default function VisitCounter() {
     setVisits(newVisits);
   }, []);
 
-  return (
-    <div className="fixed bottom-4 right-4 bg-white p-2 rounded shadow text-xs">
-      Total Visits: {visits}
-    </div>
-  );
+  return null;
 }
