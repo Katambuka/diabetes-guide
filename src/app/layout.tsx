@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from './components/Header/page'
 import Footer from './components/Footer/page'
+import VisitCounter from './components/VisitCounter'
+
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -25,6 +27,7 @@ export default function RootLayout({
           <Header />
           <main className="flex-grow">
             {children}
+            <VisitCounter /> 
           </main>
           <Footer />
         </div>
