@@ -38,7 +38,7 @@ const Header: React.FC = () => {
         {/* Desktop Navigation - Now with DARK text */}
         <nav className="hidden md:flex space-x-8">
           <Link
-            href="/"
+            href="/home"
             className="text-gray-900 hover:text-purple-600 font-medium px-3 py-2 transition-colors"
           >
             Home
@@ -60,6 +60,12 @@ const Header: React.FC = () => {
             className="text-gray-900 hover:text-purple-600 font-medium px-3 py-2 transition-colors"
           >
             Contact
+          </Link>
+          <Link
+            href="/dashboard"
+            className="text-gray-900 hover:text-purple-600 font-medium px-3 py-2 transition-colors"
+          >
+            Dashboard
           </Link>
         </nav>
       </div>

@@ -10,20 +10,26 @@
     "generate-types": "ts-node scripts/generate-types.ts"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.0.0",
+    "@prisma/client": "^6.5.0",
+    "bcryptjs": "^3.0.2",
     "glob": "^10.3.3",
     "gray-matter": "^4.0.3",
     "js-yaml": "^4.1.0",
+    "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.486.0",
     "next": "^14.1.0",
     "nodemailer": "^6.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "t": "^0.5.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.17",
     "@types/glob": "^8.1.0",
     "@types/js-yaml": "^4.0.5",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^20.11.0",
     "@types/nodemailer": "^6.4.17",
     "@types/react": "^18.2.0",

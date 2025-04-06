@@ -1,263 +1,229 @@
+'use client';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-/* eslint-disable react/no-unescaped-entities */
-import Image from "next/image";
-import ArticleCard from "./components/ArticleCard";
-import { categories } from "@/data/categories";
-import CategoryLink from "./components/CategoryLink";
-import Link from "next/link";
-import { FiArrowRight } from "react-icons/fi";
+export default function Page() {
+  const [authState, setAuthState] = useState<'loading' | 'authenticated' | 'unauthenticated'>('loading');
 
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      try {
+        const response = await fetch('/api/auth/me', {
+          credentials: 'include' 
+        });
+        
+        if (response.ok) {
+          setAuthState('authenticated');
+        } else {
+          setAuthState('unauthenticated');
+        }
+      } catch (error) {
+        console.error('Authentication check failed:', error);
+        setAuthState('unauthenticated');
+      }
+    };
 
-const articles = [
-  {
-    id: 1,
-    title: "Understanding Diabetes: Types and Symptoms",
-    excerpt: "Learn about the different types of diabetes...",
-    slug: "understanding-type-2-diabetes",
-    image: "/images/image6.jpg",
-    category: "Diabetes Basics",
-    readTime: "5 min read"
-  },
-  {
-    id: 2,
-    title: "Healthy Eating for Diabetics: A Complete Guide",
-    excerpt: "Discover the best foods to eat...",
-    slug: "foods-for-blood-sugar-control",
-    image: "/images/image8.jpg",
-    category: "Nutrition",
-    readTime: "8 min read"
-  },
-  {
-    id: 3,
-    title: "Exercise and Diabetes: Creating Your Fitness Plan",
-    excerpt: "Learn how physical activity affects...",
-    slug: "exercise-for-diabetics",
-    image: "/images/image6.jpg",
-    category: "Lifestyle",
-    readTime: "6 min read"
-  },
-];
+    checkAuthStatus();
+  }, []);
 
-export default function Home() {
+  const handleLogout = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    try {
+      const response = await fetch('/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include'
+      });
+      
+      if (response.ok) {
+        setAuthState('unauthenticated');
+      }
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
+
+  if (authState === 'loading') {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+        <div className="flex flex-col items-center gap-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+          <span className="text-indigo-600 font-medium">Loading your experience...</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-gray-50">
-      {/* Modern Hero Section */}
-      <section className="relative bg-gradient-to-br from-indigo-700 to-purple-600 text-white py-16 md:py-24 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
-          <div className="md:w-1/2 space-y-6">
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-              <span className="block mb-2 text-indigo-200">Diabetes Care</span>
-              Your Personalized Path to Better Health
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex flex-col">
+      {/* Floating Auth Button */}
+      <div className="fixed top-6 right-6 z-50">
+        {authState === 'authenticated' ? (
+          <button 
+            onClick={handleLogout}
+            className="bg-white hover:bg-gray-50 text-indigo-600 px-5 py-2.5 rounded-full transition-all shadow-md hover:shadow-lg border border-indigo-100 flex items-center gap-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            Sign Out
+          </button>
+        ) : (
+          <Link
+            href="/auth/login" 
+            className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-full transition-all shadow-md hover:shadow-lg flex items-center gap-2"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+            </svg>
+            Sign In
+          </Link>
+        )}
+      </div>
+
+      {/* Main Content */}
+      <main className="flex-grow flex items-center justify-center p-6 relative">
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-10 w-40 h-40 bg-indigo-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob"></div>
+          <div className="absolute top-60 right-20 w-48 h-48 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob animation-delay-2000"></div>
+          <div className="absolute bottom-20 left-1/2 w-44 h-44 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <div className="max-w-4xl w-full relative z-10">
+          {/* Hero Section */}
+          <div className="text-center mb-12">
+            <div className="w-24 h-24 bg-gradient-to-br from-indigo-600 to-blue-400 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+              </svg>
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight">
+              {authState === 'authenticated' ? 'Welcome Back!' : 'Welcome to Diabetes Guide'}
             </h1>
-            <p className="text-xl text-indigo-100 max-w-lg">
-              Evidence-based guidance and compassionate support to help you thrive with diabetes.
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              {authState === 'authenticated'
+                ? "Your personalized diabetes management resources are ready."
+                : "Your complete resource for diabetes management and care."}
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link 
-                href="/blog" 
-                className="bg-white text-indigo-700 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold text-lg transition duration-300 shadow-md hover:shadow-lg"
-              >
-                Explore Articles
-              </Link>
-              <Link 
-                href="#" 
-                className="border-2 border-white hover:bg-white/10 px-6 py-3 rounded-lg font-semibold text-lg transition duration-300"
-              >
-                Support Us
-              </Link>
-            </div>
           </div>
-          <div className="md:w-1/2 relative">
-            <div className="relative aspect-square w-full max-w-md mx-auto rounded-4xl overflow-hidden shadow-4xl border-4 border-white/20">
-            <Image
-  src="/images/image1.jpg"
-  alt="Description"
-  fill
-  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-/>
 
-            </div>
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-30"></div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section with Modern Cards */}
-      <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { value: "463M", label: "People with diabetes worldwide", color: "bg-indigo-100 text-indigo-700" },
-              { value: "90%", label: "Of cases are Type 2 diabetes", color: "bg-purple-100 text-purple-700" },
-              { value: "50%", label: "Risk reduction with lifestyle changes", color: "bg-teal-100 text-teal-700" },
-              { value: "1M+", label: "People helped by our resources", color: "bg-amber-100 text-amber-700" },
-            ].map((stat, index) => (
-              <div key={index} className={`p-6 rounded-2xl ${stat.color} shadow-sm hover:shadow-md transition-shadow`}>
-                <h3 className="text-3xl font-bold mb-2">{stat.value}</h3>
-                <p className="text-gray-700">{stat.label}</p>
+          {/* Content Card */}
+          <div className="bg-white/90 backdrop-blur-md p-8 md:p-10 rounded-3xl shadow-xl border border-gray-100 transform transition-all hover:shadow-2xl">
+            {authState === 'authenticated' ? (
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-indigo-700">Your Dashboard</h2>
+                <p className="text-lg text-gray-600">
+                  Access your personalized tools, track your progress, and discover new resources tailored for you.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                  <Link href="/dashboard/tracker" className="bg-indigo-50 hover:bg-indigo-100 p-6 rounded-xl transition-all group">
+                    <div className="bg-indigo-100 group-hover:bg-indigo-200 w-14 h-14 rounded-lg flex items-center justify-center mb-4 transition-all">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2">Health Tracker</h3>
+                    <p className="text-gray-600 text-sm">Monitor your glucose levels and medication</p>
+                  </Link>
+                  
+                  <Link href="/dashboard/resources" className="bg-blue-50 hover:bg-blue-100 p-6 rounded-xl transition-all group">
+                    <div className="bg-blue-100 group-hover:bg-blue-200 w-14 h-14 rounded-lg flex items-center justify-center mb-4 transition-all">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2">Resources</h3>
+                    <p className="text-gray-600 text-sm">Educational materials and guides</p>
+                  </Link>
+                  
+                  <Link href="/dashboard/community" className="bg-purple-50 hover:bg-purple-100 p-6 rounded-xl transition-all group">
+                    <div className="bg-purple-100 group-hover:bg-purple-200 w-14 h-14 rounded-lg flex items-center justify-center mb-4 transition-all">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2">Community</h3>
+                    <p className="text-gray-600 text-sm">Connect with others and share experiences</p>
+                  </Link>
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Main Content with Modern Touches */}
-      <main className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Welcome Section */}
-          <div className="text-center mb-16 max-w-4xl mx-auto">
-            <span className="inline-block px-3 py-1 mb-4 text-sm font-semibold text-indigo-700 bg-indigo-100 rounded-full">
-              Trusted Diabetes Resource
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Empowering Your Diabetes Journey
-            </h2>
-            <p className="text-xl text-gray-600">
-              We combine medical expertise with practical lifestyle advice to help you manage diabetes effectively.
-            </p>
-          </div>
-
-          {/* Featured Articles */}
-<section className="mb-20">
-  <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
-    <div>
-      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Featured Articles</h2>
-      <p className="text-gray-500 dark:text-gray-400">Handpicked resources to get you started</p>
-    </div>
-    <Link 
-      href="/blog" 
-      className="flex items-center text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium group"
-      aria-label="View all articles about diabetes management"
-    >
-      View all articles
-      <svg 
-        className="ml-1 w-5 h-5 group-hover:translate-x-1 transition-transform" 
-        fill="currentColor" 
-        viewBox="0 0 20 20"
-        aria-hidden="true"
-      >
-        <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-      </svg>
-    </Link>
-  </div>
-  
-  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-    {articles.map((article) => (
-      <article key={article.id} className="group bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow">
-        <Link 
-          href={`/blog/${article.slug}`} 
-          className="block h-full"
-          aria-label={`Read more about ${article.title}`}
-        >
-          {/* Image Container */}
-          <div className="relative h-48 w-full overflow-hidden">
-            <Image
-              src={article.image}
-              alt={`Featured image for ${article.title}`}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          </div>
-
-          {/* Content Container */}
-          <div className="p-6">
-            <span className="inline-block px-3 py-1 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-300 rounded-full text-xs mb-3">
-              {article.category}
-            </span>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-              {article.title}
-            </h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-4">{article.excerpt}</p>
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-500 dark:text-gray-400">{article.readTime}</span>
-              <span className="text-indigo-600 dark:text-indigo-400 font-medium flex items-center">
-                Read article
-                <FiArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </span>
-            </div>
-          </div>
-        </Link>
-      </article>
-    ))}
-  </div>
-</section>
-
-          {/* Categories Section */}
-          <section className="mb-20">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Browse by Category</h2>
-            <p className="text-gray-500 mb-8">Find content tailored to your specific needs</p>
-            
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-              {categories.map((category) => (
-                <CategoryLink 
-                  key={category.slug} 
-                  category={category}
-                />
-              ))}
-            </div>
-          </section>
-
-          {/* Testimonial Section */}
-          <section className="mb-20 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 md:p-12 text-white overflow-hidden relative">
-            <div className="absolute -right-10 -top-10 w-64 h-64 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-20"></div>
-            <div className="relative max-w-4xl mx-auto">
-              <div className="flex items-start">
-                <span className="text-5xl mr-4 text-indigo-200">"</span>
-                <div>
-                  <blockquote className="text-xl md:text-2xl mb-6 font-medium">
-                    The meal plans and exercise tips helped me lose 25 pounds and brought my A1C down to normal levels for the first time in years.
-                  </blockquote>
-                  <div className="flex items-center">
-                    <div className="relative w-14 h-14 mr-4">
-                    <Image
-  src="/images/image1.jpg"
-  alt="Description"
-  fill
-  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="rounded-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <p className="font-bold">Sarah J.</p>
-                      <p className="text-indigo-200">Type 2 diabetic since 2018</p>
-                    </div>
+            ) : (
+              <div className="space-y-6">
+                <h2 className="text-3xl font-bold text-indigo-700">Begin Your Journey</h2>
+                <p className="text-lg text-gray-600">
+                  Take control of your diabetes management with our comprehensive tools and resources.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                  <Link
+                    href="/dashboard"
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-3"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                    </svg>
+                    Sign In to Your Account
+                  </Link>
+                  <Link
+                    href="/auth/register"
+                    className="bg-white hover:bg-gray-50 text-indigo-600 px-8 py-4 rounded-xl transition-all shadow-md hover:shadow-lg border border-indigo-200 flex items-center justify-center gap-3"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                    </svg>
+                    Create New Account
+                  </Link>
+                </div>
+                
+                <div className="mt-8 pt-8 border-t border-gray-200">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-4">Explore Our Resources</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <Link href="#" className="text-indigo-600 hover:text-indigo-800 hover:underline text-sm">About Diabetes</Link>
+                    <Link href="#" className="text-indigo-600 hover:text-indigo-800 hover:underline text-sm">Nutrition Guide</Link>
+                    <Link href="#" className="text-indigo-600 hover:text-indigo-800 hover:underline text-sm">Exercise Tips</Link>
+                    <Link href="#" className="text-indigo-600 hover:text-indigo-800 hover:underline text-sm">FAQ</Link>
                   </div>
                 </div>
               </div>
-            </div>
-          </section>
-
-          {/* Newsletter Section */}
-          <section className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-            <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 mb-6 rounded-full bg-indigo-100 text-indigo-700">
-                <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                </svg>
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-3">Stay Updated</h2>
-              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-                Join our newsletter for weekly diabetes management tips, recipes, and research updates.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="flex-grow px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                />
-                <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-300 shadow-sm hover:shadow-md">
-                  Subscribe
-                </button>
-              </div>
-              <p className="text-xs text-gray-500 mt-3">
-                We respect your privacy. Unsubscribe at any time.
-              </p>
-            </div>
-          </section>
+            )}
+          </div>
         </div>
       </main>
+
+      {/* Simple Branding Footer */}
+      <div className="py-8 text-center text-sm text-gray-500 bg-white/50 backdrop-blur-sm border-t border-gray-100">
+        <div className="container mx-auto px-6">
+          <p>© {new Date().getFullYear()} Diabetes Guide. All rights reserved.</p>
+          <p className="mt-2">Comprehensive diabetes management resources and tools</p>
+        </div>
+      </div>
+
+      {/* Animation styles */}
+      <style jsx>{`
+        @keyframes blob {
+          0% {
+            transform: translate(0px, 0px) scale(1);
+          }
+          33% {
+            transform: translate(30px, -50px) scale(1.1);
+          }
+          66% {
+            transform: translate(-20px, 20px) scale(0.9);
+          }
+          100% {
+            transform: translate(0px, 0px) scale(1);
+          }
+        }
+        .animate-blob {
+          animation: blob 7s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+      `}</style>
     </div>
   );
 }
