@@ -8,6 +8,7 @@
       "carb",
       "Clin",
       "cliui",
+      "clsx",
       "cspotcode",
       "csstype",
       "eastasianwidth",
@@ -26,6 +27,7 @@
       "Gluco",
       "glycemic",
       "gnueabihf",
+      "hkdf",
       "hyperosmolar",
       "injectables",
       "isaacs",
@@ -39,6 +41,7 @@
       "Jumeira",
       "Jumeirah",
       "ketoacidosis",
+      "kurkle",
       "LADA",
       "lightningcss",
       "loong",
@@ -57,6 +60,7 @@
       "OGTT",
       "Omnipod's",
       "oslojs",
+      "panva",
       "parseargs",
       "Pathophysiological",
       "pathophysiology",
@@ -64,6 +68,7 @@
       "PKCE",
       "pkgjs",
       "Polyuria",
+      "preact",
       "Prediabetes",
       "Preeclampsia",
       "Priya",
@@ -79,6 +84,7 @@
       "tapable",
       "UKPDS",
       "Uncategorized",
-      "undici"
+      "undici",
+      "yallist"
    ]
 }
