@@ -1,7 +1,7 @@
-'use client';
+'use client'; 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-
+import "./globals.css";
 export default function Page() {
   const [authState, setAuthState] = useState<'loading' | 'authenticated' | 'unauthenticated'>('loading');
 
@@ -156,7 +156,7 @@ export default function Page() {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                   <Link
-                    href="/dashboard"
+                    href="/auth/login"
                     className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-3"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

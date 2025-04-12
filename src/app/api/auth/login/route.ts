@@ -1,70 +1,104 @@
+
 // app/api/auth/login/route.ts
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { cookies } from 'next/headers';
+import jwt from 'jsonwebtoken';
 import prisma from 'lib/prisma';
 
-export async function POST(req: Request) {
-  console.log('Login request received');
-  
-  try {
-    const { email, password } = await req.json();
-    console.log('Login attempt for:', email);
+// TypeScript interfaces for better type safety
+interface User {
+  id: string;
+  email: string;
+  name: string | null;
+  password: string;
+}
 
-    // 1. Find user
-    const user = await prisma.user.findUnique({ 
-      where: { email },
+interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export async function POST(req: Request) {
+  try {
+    // 1. Validate request body
+    const { email, password }: LoginRequest = await req.json();
+    
+    if (!email || !password) {
+      return NextResponse.json(
+        { error: 'Email and password are required' },
+        { status: 400 }
+      );
+    }
+
+    // 2. Find user with proper error handling
+    const user = await prisma.user.findUnique({
+      where: { email: email.toLowerCase() },
       select: { id: true, email: true, name: true, password: true }
     });
-    console.log('User found:', user ? 'Yes' : 'No');
 
     if (!user) {
-      console.log('User not found');
-      return invalidResponse();
+      return invalidCredentialsResponse();
     }
 
-    // 2. Compare passwords
-    console.log('Comparing passwords...');
-    const validPassword = await bcrypt.compare(password, user.password);
-    console.log('Password valid:', validPassword);
-
-    if (!validPassword) {
-      console.log('Invalid password');
-      return invalidResponse();
+    // 3. Verify password with timing-safe comparison
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return invalidCredentialsResponse();
     }
 
-    // 3. Create token (temporarily simplified)
-    const token = JSON.stringify({ userId: user.id });
-    console.log('Generated token:', token);
+    // 4. Generate JWT token with proper typing
+    const token = jwt.sign(
+      { 
+        userId: user.id,
+        email: user.email
+      },
+      process.env.JWT_SECRET!,
+      { 
+        expiresIn: '7d',
+        issuer: 'your-app-name'
+      }
+    );
 
-    // 4. Set cookie
-    cookies().set({
+    // 5. Set secure, HTTP-only cookie
+    (await
+      cookies()).set({
       name: 'auth_token',
       value: token,
       httpOnly: true,
-      secure: false, // Disable secure for local testing
-      maxAge: 60 * 60 * 24 * 7,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict', // More secure than 'lax'
+      maxAge: 60 * 60 * 24 * 7, // 7 days
       path: '/',
     });
-    console.log('Cookie set successfully');
 
-    return NextResponse.json({ 
+    // 6. Return sanitized user data
+    return NextResponse.json({
       success: true,
-      user: { id: user.id, email: user.email, name: user.name } 
+      user: sanitizeUser(user)
     });
 
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json(
-      { error: 'Login failed', details: error instanceof Error ? error.message : String(error) },
+      { error: 'An unexpected error occurred. Please try again.' },
       { status: 500 }
     );
   }
 }
 
-function invalidResponse() {
+// Helper functions
+function invalidCredentialsResponse() {
   return NextResponse.json(
     { error: 'Invalid email or password' },
     { status: 401 }
   );
+}
+
+function sanitizeUser(user: User) {
+  return {
+    id: user.id,
+    email: user.email,
+    name: user.name
+  };
 }

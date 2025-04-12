@@ -1,36 +1,74 @@
-import { NextResponse } from 'next/server';
-import bcrypt from 'bcryptjs';
-import prisma from 'lib/prisma';
+// app/api/auth/register/route.ts
+import { NextResponse } from 'next/server'
+import bcrypt from 'bcryptjs'
+import prisma from 'lib/prisma'
 
-export async function POST(req: Request) {
+interface RegisterRequest {
+  email: string
+  name?: string
+  password: string
+}
+
+interface UserResponse {
+  id: string
+  email: string
+  name?: string | null
+}
+
+export async function POST(request: Request) {
   try {
-    const { email, name, password } = await req.json();
-    
-    const existingUser = await prisma.user.findUnique({ where: { email } });
-    if (existingUser) {
+    const { email, name, password } = await request.json() as RegisterRequest
+
+    // Input validation
+    if (!email || !password) {
       return NextResponse.json(
-        { error: 'User already exists' },
+        { error: 'Email and password are required' },
         { status: 400 }
-      );
+      )
     }
 
-    const hashedPassword = await bcrypt.hash(password, 12);
-    
+    const existingUser = await prisma.user.findUnique({
+      where: { email: email.toLowerCase() }
+    })
+
+    if (existingUser) {
+      return NextResponse.json(
+        { error: 'User with this email already exists' },
+        { status: 409 }
+      )
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 12)
+
     const user = await prisma.user.create({
       data: {
-        email,
+        email: email.toLowerCase(),
         name,
         password: hashedPassword
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true
       }
-    });
+    }) as UserResponse
 
-    return NextResponse.json({ 
-      user: { id: user.id, email: user.email, name: user.name } 
-    });
-  } catch (error) {
     return NextResponse.json(
-      { error: 'Registration failed' },
+      { user },
+      { status: 201 }
+    )
+
+  } catch (error: unknown) {
+    console.error('Registration error:', error)
+    
+    let errorMessage = 'Internal server error'
+    if (error instanceof Error) {
+      errorMessage = error.message
+    }
+
+    return NextResponse.json(
+      { error: errorMessage },
       { status: 500 }
-    );
+    )
   }
 }

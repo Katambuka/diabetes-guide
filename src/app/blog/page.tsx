@@ -3,6 +3,8 @@ import { getAllPosts } from '@/data/blogPosts';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FiClock, FiArrowRight } from 'react-icons/fi';
+import Footer from '../components/Footer/page';
+import Header from '../components/Header/page';
 
 export default function BlogPage({ searchParams }: { searchParams?: { page?: string } }) {
   const currentPage = Number(searchParams?.page) || 1;
@@ -15,7 +17,8 @@ export default function BlogPage({ searchParams }: { searchParams?: { page?: str
   const paginatedPosts = allPosts.slice(startIndex, startIndex + postsPerPage);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <>
+    <Header/>
       <h1 className="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
         Welcome To Your Diabetes Health Hub
       </h1>
@@ -105,6 +108,8 @@ export default function BlogPage({ searchParams }: { searchParams?: { page?: str
           </Link>
         )}
       </div>
-    </div>
+    <Footer/>
+    </>
   );
+  
 }

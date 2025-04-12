@@ -1,22 +1,68 @@
-
 datasource db {
   provider = "postgresql"
-  url      = env("POSTGRES_PRISMA_URL") 
-}
-
-model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String?
-  password  String
-  resetToken  String? 
-  createdAt DateTime @default(now())
+  url      = env("POSTGRES_PRISMA_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
+  output   = "./node_modules/.prisma/client" 
 }
 
+// Your existing models
+model User {
+  id            Int      @id @default(autoincrement())
+  email         String   @unique
+  name          String?
+  password      String
+  resetToken    String?  @unique
+  diabetesType  String?  
+  diagnosisDate DateTime?
+  doctor        String?
+  lastA1C       Float?
+  createdAt     DateTime @default(now())
+  accounts      Account[]
+  sessions      Session[]
+
+  @@index([email])
+  @@index([resetToken])
+}
+
+// NextAuth required models
+model Account {
+  id                 Int     @id @default(autoincrement())
+  userId             Int
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           Int      @id @default(autoincrement())
+  sessionToken String   @unique
+  userId       Int
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// Your existing patient models remain unchanged
 model Patient {
   id          Int      @id @default(autoincrement())
   name        String
@@ -25,6 +71,11 @@ model Patient {
   bloodType   String?
   createdAt   DateTime @default(now())
   glucoseReadings GlucoseReading[]
+  medications Medication[]
+
+  @@index([email])
+  @@index([birthDate])
+  @@index([createdAt])
 }
 
 model GlucoseReading {
@@ -34,4 +85,21 @@ model GlucoseReading {
   timestamp DateTime @default(now())
   patient   Patient  @relation(fields: [patientId], references: [id])
   patientId Int
+
+  @@index([patientId])
+  @@index([timestamp])
+  @@index([value])
+}
+
+model Medication {
+  id          Int      @id @default(autoincrement())
+  name        String
+  dosage      String
+  frequency   String
+  patient     Patient  @relation(fields: [patientId], references: [id])
+  patientId   Int
+  prescribedAt DateTime @default(now())
+
+  @@index([patientId])
+  @@index([name])
 }

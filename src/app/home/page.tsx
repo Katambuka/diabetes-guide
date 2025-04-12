@@ -5,6 +5,8 @@ import { categories } from "@/data/categories";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 import CategoryLink from "../components/CategoryLink";
+import Header from "../components/Header/page";
+import Footer from "../components/Footer/page";
 
 
 const articles = [
@@ -41,6 +43,7 @@ export default function Home() {
   return (
     <div className="bg-gray-50">
       {/* Modern Hero Section */}
+      <Header />
       <section className="relative bg-gradient-to-br from-indigo-700 to-purple-600 text-white py-16 md:py-24 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
           <div className="md:w-1/2 space-y-6">
@@ -257,6 +260,7 @@ export default function Home() {
           </section>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

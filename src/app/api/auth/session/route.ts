@@ -6,10 +6,10 @@ import { verifyToken } from 'lib/jwt';
 
 export async function GET() {
   try {
-    const token = cookies().get('auth_token')?.value;
+    const token = (await cookies()).get('auth_token')?.value;
     if (!token) return noSessionResponse();
 
-    const decoded = verifyToken(token); // Updated this line
+    const decoded = verifyToken(token); 
     const user = await prisma.user.findUnique({
       where: { id: decoded.userId },
       select: { id: true, name: true, email: true }

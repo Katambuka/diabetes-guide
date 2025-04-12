@@ -4,6 +4,9 @@ import TeamCard from '../components/TeamCard';
 import { FaHeartbeat, FaBookMedical, FaUsers } from 'react-icons/fa';
 import { FiArrowRight } from 'react-icons/fi';
 import Link from 'next/link';
+import Footer from '../components/Footer/page';
+import Header from '../components/Header/page';
+
 
 export default function About() {
   const teamMembers = [
@@ -34,6 +37,8 @@ export default function About() {
   ];
 
   return (
+    <>
+    <Header/>
     <div className="bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-20 px-4 sm:px-6 lg:px-8">
@@ -183,5 +188,7 @@ export default function About() {
         </div>
       </section>
     </div>
+    <Footer/>
+    </>
   );
 }
