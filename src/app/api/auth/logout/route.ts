@@ -1,13 +1,3 @@
-
-//app/api/auth/logout/route.ts
-/*import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
-
-export async function POST() {
-  (await cookies()).delete('auth_token');
-  return NextResponse.json({ message: 'Logout successful' });
-}*/
-
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
@@ -15,16 +5,6 @@ export async function POST() {
   try {
     const cookieStore = cookies();
     
-    // Check if token exists before trying to delete
-    const token = cookieStore.get('auth_token');
-    if (!token) {
-      return NextResponse.json(
-        { success: false, message: 'No active session' },
-        { status: 400 }
-      );
-    }
-
-    // Clear the cookie with proper attributes
     cookieStore.delete('auth_token');
     
     return NextResponse.json(

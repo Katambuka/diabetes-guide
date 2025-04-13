@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 
-import prisma from '@/lib/prisma'
+import prisma from 'lib/prisma'
 import { authOptions } from 'lib/authOptions'
 
 export async function GET() {
@@ -49,8 +49,6 @@ export async function POST(request: Request) {
     const newReading = await prisma.glucoseReading.create({
       data: {
         value,
-        date: new Date(date),
-        notes,
         patient: { connect: { email: session.user.email } }
       }
     })

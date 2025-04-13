@@ -5,8 +5,6 @@ import bcrypt from 'bcryptjs';
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
 import prisma from 'lib/prisma';
-
-// TypeScript interfaces for better type safety
 interface User {
   id: string;
   email: string;
@@ -67,7 +65,7 @@ export async function POST(req: Request) {
       value: token,
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict', // More secure than 'lax'
+      sameSite: 'strict', 
       maxAge: 60 * 60 * 24 * 7, // 7 days
       path: '/',
     });
@@ -75,7 +73,6 @@ export async function POST(req: Request) {
     // 6. Return sanitized user data
     return NextResponse.json({
       success: true,
-      user: sanitizeUser(user)
     });
 
   } catch (error) {

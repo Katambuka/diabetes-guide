@@ -1,7 +1,7 @@
 //api/auth/forgot-password/route.ts
 import { NextResponse } from 'next/server'
 import jwt from 'jsonwebtoken'
-import prisma from '@/lib/prisma'
+import prisma from 'lib/prisma'
 import nodemailer from 'nodemailer'
 
 export async function POST(request: Request) {
