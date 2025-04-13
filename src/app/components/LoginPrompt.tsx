@@ -1,17 +1,31 @@
-'use client'
-import Link from 'next/link'
-import { Button } from './ui/button'
+// components/ui/button.tsx
+import React from 'react';
 
-export default function LoginPrompt() {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4">
-      <h2 className="text-2xl font-semibold text-gray-800">Access Required</h2>
-      <p className="text-gray-600 max-w-md text-center">
-        Please sign in to view your dashboard
-      </p>
-      <Button asChild variant="default">
-        <Link href="/login">Sign In</Link>
-      </Button>
-    </div>
-  )
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'default' | 'primary' | 'secondary';
+  asChild?: boolean;
 }
+
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ children, variant = 'default', asChild, ...props }, ref) => {
+    const classNames = {
+      default: 'bg-blue-500 text-white',
+      primary: 'bg-green-500 text-white',
+      secondary: 'bg-gray-500 text-white',
+    };
+
+    const buttonClass = classNames[variant] || classNames.default;
+
+    if (asChild) {
+      return <>{children}</>;
+    }
+
+    return (
+      <button ref={ref} className={`p-2 rounded ${buttonClass}`} {...props}>
+        {children}
+      </button>
+    );
+  }
+);
+
+Button.displayName = 'Button';

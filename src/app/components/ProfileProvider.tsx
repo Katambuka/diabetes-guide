@@ -1,21 +1,18 @@
-// src/components/ProfileProvider.tsx
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
-interface Profile {
-  id: number
+export interface ProfileType {
   name: string
   email: string
   diabetesType?: string
   lastA1C?: number
   diagnosisDate?: Date
   doctor?: string
-  // Add other profile fields you need
 }
 
-interface ProfileContextType {
-  profile: Profile | null
+export interface ProfileContextType {
+  profile: ProfileType | null
   loading: boolean
   error: string | null
   refreshSession: () => Promise<void>
@@ -23,45 +20,46 @@ interface ProfileContextType {
 
 const ProfileContext = createContext<ProfileContextType | undefined>(undefined)
 
-export function ProfileProvider({ children }: { children: React.ReactNode }) {
-  const [profile, setProfile] = useState<Profile | null>(null)
-  const [loading, setLoading] = useState(true)
+export const ProfileProvider = ({ children }: { children: ReactNode }) => {
+  const [profile, setProfile] = useState<ProfileType | null>(null)
+  const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
-  const fetchProfile = async () => {
+  const refreshSession = async () => {
     setLoading(true)
-    setError(null)
     try {
-      const response = await fetch('/api/auth/me', {
-        credentials: 'include'
+      const token = localStorage.getItem("token")
+      if (!token) throw new Error("No token found")
+
+      const res = await fetch("/api/profile", {
+        headers: { Authorization: `Bearer ${token}` },
       })
-      
-      if (!response.ok) {
-        throw new Error(response.statusText || 'Failed to fetch profile')
+
+      if (!res.ok) throw new Error("Failed to fetch profile")
+
+      const data = await res.json()
+
+      // Convert diagnosisDate string to Date object if present
+      if (data.diagnosisDate) {
+        data.diagnosisDate = new Date(data.diagnosisDate)
       }
 
-      const profileData = await response.json()
-      setProfile(profileData)
-    } catch (err) {
-      console.error('Failed to fetch profile:', err)
-      setError(err instanceof Error ? err.message : 'Unknown error')
-      setProfile(null)
+      setProfile(data)
+      setError(null)
+    } catch (err: any) {
+      console.error("Error refreshing session:", err)
+      setError(err.message || "Unknown error")
     } finally {
       setLoading(false)
     }
   }
 
   useEffect(() => {
-    fetchProfile()
+    refreshSession()
   }, [])
 
   return (
-    <ProfileContext.Provider value={{ 
-      profile, 
-      loading,
-      error,
-      refreshSession: fetchProfile
-    }}>
+    <ProfileContext.Provider value={{ profile, loading, error, refreshSession }}>
       {children}
     </ProfileContext.Provider>
   )

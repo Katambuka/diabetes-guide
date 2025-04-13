@@ -51,7 +51,7 @@ export async function POST(request: Request) {
         email: true,
         name: true
       }
-    }) as UserResponse
+    }) as unknown as UserResponse
 
     return NextResponse.json(
       { user },

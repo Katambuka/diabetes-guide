@@ -32,9 +32,10 @@ export const authOptions: NextAuthOptions = {
         }
 
         return {
-          id: user.id.toString(),
+          id: user.id.toString(), 
           email: user.email,
-          name: user.name || undefined
+          name: user.name || undefined,
+          diabetesType: user.diabetesType || null, 
         };
       }
     })
