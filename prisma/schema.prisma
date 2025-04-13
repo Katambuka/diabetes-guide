@@ -1,21 +1,20 @@
 datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRES_PRISMA_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
 generator client {
   provider = "prisma-client-js"
-  output   = "./node_modules/.prisma/client" 
 }
 
-// Your existing models
 model User {
   id            Int      @id @default(autoincrement())
   email         String   @unique
   name          String?
   password      String
   resetToken    String?  @unique
-  diabetesType  String?  
+  diabetesType  String?
   diagnosisDate DateTime?
   doctor        String?
   lastA1C       Float?
@@ -27,7 +26,6 @@ model User {
   @@index([resetToken])
 }
 
-// NextAuth required models
 model Account {
   id                 Int     @id @default(autoincrement())
   userId             Int
@@ -62,7 +60,6 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// Your existing patient models remain unchanged
 model Patient {
   id          Int      @id @default(autoincrement())
   name        String

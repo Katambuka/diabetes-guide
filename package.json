@@ -8,8 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "generate-types": "ts-node scripts/generate-types.ts",
-    "vercel-build": "pnpm install && prisma generate && next build",
-    "postinstall": "prisma generate"
+    "vercel-build": "pnpm install && prisma generate && prisma migrate deploy && next build",
+    "postinstall": "prisma generate",
+    "migrate": "prisma migrate deploy"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.0",
