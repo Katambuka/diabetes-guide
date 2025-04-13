@@ -1,11 +1,11 @@
-datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DATABASE_URL_UNPOOLED")
-}
-
 generator client {
   provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -61,14 +61,14 @@ model VerificationToken {
 }
 
 model Patient {
-  id          Int      @id @default(autoincrement())
-  name        String
-  email       String   @unique
-  birthDate   DateTime
-  bloodType   String?
-  createdAt   DateTime @default(now())
+  id              Int              @id @default(autoincrement())
+  name            String
+  email           String           @unique
+  birthDate       DateTime
+  bloodType       String?
+  createdAt       DateTime         @default(now())
   glucoseReadings GlucoseReading[]
-  medications Medication[]
+  medications     Medication[]
 
   @@index([email])
   @@index([birthDate])
@@ -89,12 +89,12 @@ model GlucoseReading {
 }
 
 model Medication {
-  id          Int      @id @default(autoincrement())
-  name        String
-  dosage      String
-  frequency   String
-  patient     Patient  @relation(fields: [patientId], references: [id])
-  patientId   Int
+  id           Int      @id @default(autoincrement())
+  name         String
+  dosage       String
+  frequency    String
+  patient      Patient  @relation(fields: [patientId], references: [id])
+  patientId    Int
   prescribedAt DateTime @default(now())
 
   @@index([patientId])

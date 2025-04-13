@@ -5,12 +5,9 @@
   "scripts": {
     "dev": "prisma generate && next dev",
     "build": "prisma generate && next build",
-    "start": "next start",
-    "lint": "next lint",
-    "generate-types": "ts-node scripts/generate-types.ts",
-    "vercel-build": "pnpm install && prisma generate && prisma migrate deploy && next build",
     "postinstall": "prisma generate",
-    "migrate": "prisma migrate deploy"
+    "prisma:reset": "rm -rf node_modules/.prisma && prisma generate",
+    "prisma:studio": "prisma studio"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.0",
@@ -28,12 +25,13 @@
     "next": "^14.1.0",
     "next-auth": "^4.24.11",
     "nodemailer": "^6.10.0",
+    "prisma": "^6.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
+    "rimraf": "^6.0.1",
     "t": "^0.5.1",
-    "tailwind-merge": "^3.2.0",
-    "prisma": "^6.6.0"
+    "tailwind-merge": "^3.2.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.3",
