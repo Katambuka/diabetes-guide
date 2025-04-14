@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -74,6 +73,7 @@ export default function CommentSection({ postSlug }: { postSlug: string }) {
     setComment('');
     setIsSubmitting(false);
   };
+
   const handleLike = (id: number) => {
     setComments(prev => 
       prev.map(c => 
@@ -86,7 +86,7 @@ export default function CommentSection({ postSlug }: { postSlug: string }) {
     <div className="mt-16 border-t pt-12">
       <h3 className="text-2xl font-bold mb-8">Community Discussion</h3>
       
-      <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 mb-10">
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -97,7 +97,7 @@ export default function CommentSection({ postSlug }: { postSlug: string }) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Your name *"
-              className="pl-10 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               required
             />
           </div>
@@ -110,7 +110,7 @@ export default function CommentSection({ postSlug }: { postSlug: string }) {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Your location (optional)"
-              className="pl-10 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="pl-10 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
             />
           </div>
         </div>
@@ -120,12 +120,12 @@ export default function CommentSection({ postSlug }: { postSlug: string }) {
           onChange={(e) => setComment(e.target.value)}
           placeholder="Share your thoughts... *"
           rows={4}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent mb-4"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent mb-4"
           required
         />
         
         <div className="flex justify-between items-center">
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-sm text-gray-500">
             * Required fields
           </p>
           <button
@@ -153,32 +153,32 @@ export default function CommentSection({ postSlug }: { postSlug: string }) {
 
       <div className="space-y-6">
         {comments.length === 0 ? (
-          <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+          <div className="text-center py-8 text-gray-500">
             No comments yet. Be the first to share your thoughts!
           </div>
         ) : (
           comments.map((comment) => (
-            <div key={comment.id} className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
+            <div key={comment.id} className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-3">
-                  <div className="bg-purple-100 dark:bg-purple-900/50 text-purple-800 dark:text-purple-200 rounded-full w-10 h-10 flex items-center justify-center font-medium">
+                  <div className="bg-purple-100 text-purple-800 rounded-full w-10 h-10 flex items-center justify-center font-medium">
                     {comment.author.charAt(0)}
                   </div>
                   <div>
                     <span className="font-bold">{comment.author}</span>
                     {comment.location && (
-                      <span className="text-sm text-gray-500 dark:text-gray-400 block md:inline md:ml-2">
+                      <span className="text-sm text-gray-500 block md:inline md:ml-2">
                         from {comment.location}
                       </span>
                     )}
                   </div>
                 </div>
-                <span className="text-sm text-gray-500 dark:text-gray-400">{comment.date}</span>
+                <span className="text-sm text-gray-500">{comment.date}</span>
               </div>
-              <p className="text-gray-700 dark:text-gray-300 pl-13">{comment.content}</p>
+              <p className="text-gray-700 pl-13">{comment.content}</p>
               <button 
                 onClick={() => handleLike(comment.id)}
-                className="flex items-center space-x-1 text-sm text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 mt-3 pl-13"
+                className="flex items-center space-x-1 text-sm text-gray-500 hover:text-purple-600 mt-3 pl-13"
               >
                 <FiHeart className="text-base" />
                 <span>Like ({comment.likes})</span>
